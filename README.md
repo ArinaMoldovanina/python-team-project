@@ -11,4 +11,5 @@
 python main.py
 (На Ubuntu: python3 main.py)
 
+
 Версия 1.0 — стабильная
