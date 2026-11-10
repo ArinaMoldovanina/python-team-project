@@ -1,6 +1,103 @@
-#Задание 2А
-import random
-memes = ["Это фиаско, братан", "Кринж", "База","Это база",
-        "Изи катка", "Гг вп", "Скилл ишью"]
-print("Твой мем на сегодня:")
-print(random.choice(memes))
+#Задание 1
+class Streamer:
+    def __init__(self, nick, subscribers):
+        self.nick = nick
+        self.donates = []
+        self.subscribers = subscribers
+
+    def add_donate(self, amount):
+        self.donates.append(amount)
+
+    def total_donates(self):
+        total = 0
+        for i in self.donates:
+            total = total + i
+        return total
+
+    def average_donate(self):
+        if len(self.donates) == 0:
+            return 0
+        return self.total_donates() / len(self.donates)
+
+def print_stats(streamer):
+    print("Стример:", streamer.nick)
+    print(f"Донатов: {len(streamer.donates)}, сумма: {streamer.total_donates()}, средний: {round(streamer.average_donate(), 1)}")
+    print("Подписчиков:", streamer.subscribers)
+
+def is_popular(streamer):
+    return streamer.subscribers > 1000
+
+a = Streamer("ShadowStorm", 1500)
+a.add_donate(100)
+a.add_donate(250)
+a.add_donate(50)
+print_stats(a)
+print("Популярен:", is_popular(a) )
+
+#Задание 2
+class Character:
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+        self.health = 100
+        self.inventory = []
+
+    def take_damage(self, damage):
+        self.health = max(0 , self.health - damage)
+
+    def heal(self, amount):
+        self.health += amount
+
+    def add_item(self, item):
+        self.inventory.append(item)
+
+
+def print_character(hero):
+    print("\nПерсонаж:", hero.name)
+    print(f"Уровень: {hero.level}, здоровье: {hero.health}")
+    print("Инвентарь: [" + ", ".join(hero.inventory) + "]")
+
+
+def is_alive(hero):
+    return hero.health > 0
+
+hero = Character("Genshin_Hero", 42)
+hero.add_item("Меч дождя")
+hero.add_item("Крылышки ветра")
+hero.take_damage(30)
+hero.heal(10)
+print_character(hero)
+print("Жив:", is_alive(hero))
+
+#Задание 3
+class Student:
+    def __init__(self, name, group):
+        self.name = name
+        self.group = group
+        self.grades = []
+
+    def add_grade(self, grade):
+        self.grades.append(grade)
+
+    def average_grade(self):
+        if len(self.grades) == 0:
+            return 0
+        total = 0
+        for i in self.grades:
+            total += i
+        return total / len(self.grades)
+
+def print_student(student):
+    print("\nСтудент:", student.name + ", группа", student.group)
+    print("Оценки: [" + ", ".join(str(g) for g in student.grades) + "]")
+    print("Средний балл:", round(student.average_grade(), 1))
+
+def is_good_student(student):
+    return student.average_grade() >= 4
+
+a = Student("Иван Иванов", "13/9")
+a.add_grade(5)
+a.add_grade(4)
+a.add_grade(5)
+print_student(a)
+print("Отличник:", is_good_student(a))
