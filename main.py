@@ -1,4 +1,3 @@
-#Задание 1
 class Streamer:
     def __init__(self, nick, subscribers):
         self.nick = nick
