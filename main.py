@@ -1,38 +1,26 @@
 #Задание 1
 class Streamer:
-    def __init__(self, nick, subscribers):
-        self.nick = nick
-        self.donates = []
+    def __init__(self, nickname, subscribers):
+        self.nickname = nickname
         self.subscribers = subscribers
+        self.donates = []   # список сумм донатов
 
     def add_donate(self, amount):
         self.donates.append(amount)
 
     def total_donates(self):
-        total = 0
-        for i in self.donates:
-            total = total + i
-        return total
+        return sum(self.donates)
 
     def average_donate(self):
         if len(self.donates) == 0:
             return 0
         return self.total_donates() / len(self.donates)
 
-def print_stats(streamer):
-    print("Стример:", streamer.nick)
-    print(f"Донатов: {len(streamer.donates)}, сумма: {streamer.total_donates()}, средний: {round(streamer.average_donate(), 1)}")
-    print("Подписчиков:", streamer.subscribers)
+streamer = Streamer("GolubKin", 1200)
+streamer.add_donate(500)
+streamer.add_donate(150)
+print("Код класса Стример загружен")
 
-def is_popular(streamer):
-    return streamer.subscribers > 1000
-
-a = Streamer("ShadowStorm", 1500)
-a.add_donate(100)
-a.add_donate(250)
-a.add_donate(50)
-print_stats(a)
-print("Популярен:", is_popular(a) )
 
 #Задание 2
 class Character:
@@ -101,3 +89,13 @@ a.add_grade(4)
 a.add_grade(5)
 print_student(a)
 print("Отличник:", is_good_student(a))
+
+def print_stats(streamer):
+    print(f"Стример: {streamer.nickname}")
+    print(f"Подписчики: {streamer.subscribers}")
+    print(f"Всего донатов: {streamer.total_donates()}")
+    print(f"Средний донат: {streamer.average_donate()}")
+
+
+print_stats(streamer)
+
